@@ -1,6 +1,7 @@
 const { AttachmentBuilder } = require("discord.js");
 const { handleMemeCommand } = require("./memeHandler");
 const { handlewh40kCommand } = require("./wh40k");
+const { fetchAllMessages } = require('./fetchMessages');
 
 const monitoredChannelId = "1275732476408500255";
 const adminRoleId = "1275712561282547763";
@@ -23,29 +24,28 @@ const handleMessages = async (message) => {
   }
 
   // COMMANDS HANDLER
-if (/help po/i.test(message.content)) {
-  message.channel.send(
-    "```" +
+  if (/help po/i.test(message.content)) {
+    message.channel.send(
+      "```" +
       "\nHello! I am bot Luis. Ginawa ako para manggago. Maraming Salamat! :D" +
       "\nhttps://github.com/ruisu-iwnl" +
       "\n----------------------------------------------------" +
       "\nFunny Commands:\n\n" +
       "chino - Displays magic word\n" +
       "zombie - Displays summoning word\n" +
-      "for the emperor - Fetches a random Warhammer 40k meme\n" + // New command added here
+      "for the emperor - Fetches a random Warhammer 40k meme\n" +
       "----------------------------------------------------" +
       "\n!!!USEFUL Commands:\n\n" +
       "help po - Displays this message\n" +
+	  "fetch all - (for dev only)wraps all messages into a text file\n" +
       "linis po - clears the last 10 messages" +
       "\n----------------------------------------------------" +
       "\n```",
-  );
-}
-
+    );
+  }
 
   if (/chino/i.test(message.content)) {
     const attachment = new AttachmentBuilder(__dirname + '/emote.jpg');
-
     message.channel.send({ content: "TANG INA MO!", files: [attachment] });
   }
 
@@ -102,6 +102,9 @@ if (/help po/i.test(message.content)) {
       setTimeout(() => tempMessage.delete(), 5000);
     }
   }
+
+  // FETCH ALL MESSAGES COMMAND
+  await fetchAllMessages(message);
 
   // HANDLE MEME COMMAND
   handleMemeCommand(message);
