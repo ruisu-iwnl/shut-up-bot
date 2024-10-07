@@ -30,7 +30,7 @@ const handleMessages = async (message) => {
         "\n----------------------------------------------------" +
         "\nFunny Commands:\n\nchino - Displays magic word\nzombie - Displays summoning word\nmeme - Displays random meme" +
         "\n----------------------------------------------------" +
-        "\n!!!USEFUL Commands:\n\nhelp po - Displays this message'\npakilinis po - clears the last 10 messages" +
+        "\n!!!USEFUL Commands:\n\nhelp po - Displays this message'\nlinis po - clears the last 10 messages" +
         "\n----------------------------------------------------" +
         "\n```",
     );
@@ -49,7 +49,7 @@ const handleMessages = async (message) => {
   }
 
   if (/kuya/i.test(message.content)) {
-    const attachment = new AttachmentBuilder(__dirname + '/boomer.jpg');
+    const attachment = new AttachmentBuilder(__dirname + '/boomer.png');
     message.channel.send({
       content: "```" + "\nleft 4 dead 2 (:" + "\n```",
       files: [attachment],
