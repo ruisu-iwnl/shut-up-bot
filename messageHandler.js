@@ -1,5 +1,6 @@
 const { AttachmentBuilder } = require("discord.js");
 const { handleMemeCommand } = require("./memeHandler");
+const { handlewh40kCommand } = require("./wh40k");
 
 const monitoredChannelId = "1275732476408500255";
 const adminRoleId = "1275712561282547763";
@@ -22,19 +23,25 @@ const handleMessages = async (message) => {
   }
 
   // COMMANDS HANDLER
-  if (/help po/i.test(message.content)) {
-    message.channel.send(
-      "```" +
-        "\nHello! I am bot luis. Ginawa ako para manggago. Maraming Salamat! :D" +
-        "\nhttps://github.com/ruisu-iwnl" +
-        "\n----------------------------------------------------" +
-        "\nFunny Commands:\n\nchino - Displays magic word\nzombie - Displays summoning word\nmeme - Displays random meme" +
-        "\n----------------------------------------------------" +
-        "\n!!!USEFUL Commands:\n\nhelp po - Displays this message'\nlinis po - clears the last 10 messages" +
-        "\n----------------------------------------------------" +
-        "\n```",
-    );
-  }
+if (/help po/i.test(message.content)) {
+  message.channel.send(
+    "```" +
+      "\nHello! I am bot Luis. Ginawa ako para manggago. Maraming Salamat! :D" +
+      "\nhttps://github.com/ruisu-iwnl" +
+      "\n----------------------------------------------------" +
+      "\nFunny Commands:\n\n" +
+      "chino - Displays magic word\n" +
+      "zombie - Displays summoning word\n" +
+      "for the emperor - Fetches a random Warhammer 40k meme\n" + // New command added here
+      "----------------------------------------------------" +
+      "\n!!!USEFUL Commands:\n\n" +
+      "help po - Displays this message\n" +
+      "linis po - clears the last 10 messages" +
+      "\n----------------------------------------------------" +
+      "\n```",
+  );
+}
+
 
   if (/chino/i.test(message.content)) {
     const attachment = new AttachmentBuilder(__dirname + '/emote.jpg');
@@ -98,6 +105,8 @@ const handleMessages = async (message) => {
 
   // HANDLE MEME COMMAND
   handleMemeCommand(message);
+  
+  handlewh40kCommand(message);
 };
 
 module.exports = { handleMessages };
